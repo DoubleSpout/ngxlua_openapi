@@ -14,7 +14,7 @@ Mysql_CLass = {
     max_packet_size =  1024 * 1024
 }
 
-Mysql_CLass.static = {}
+
 
 function Mysql_CLass:connect()
 		
@@ -79,7 +79,7 @@ function Mysql_CLass:query_api_service(db, uri)
 
 	 local res2, err, errno, sqlstate =
               db:query("SELECT name,apikey,ApiSecret from ApiUserRoleTag as a JOIN ApiUser as b ON a.ApiUserId = b.id where a.ServiceRoleId = " .. api_service_table.serviceroleid )
-         if not res then
+         if not res2 then
               ngx.log(ngx.ERR, "bad result: " .. err .. ": " .. errno .. ": ".. sqlstate .. ".") --出错记录错误日志
               return ngx.HTTP_INTERNAL_SERVER_ERROR, nil, ERR_MYSQL_ERROR
          end
