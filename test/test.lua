@@ -131,7 +131,6 @@ ngx.say('data == '.. str ..' : ' .. tostring(assert(data == str)))
 ngx.say('发送错误的sign签名，测试完毕')
 
 
-
 end
 
 
@@ -209,6 +208,37 @@ ngx.say('错误的x-www-form发送数据，测试完毕')
 end
 
 
+do   --重建缓存
+
+ngx.req.set_header("Content-Type", "application/x-www-form-urlencoded")
+local res = ngx.location.capture("/rebuild",{method=ngx.HTTP_GET})
+
+local code = res.status
+local data = trim(res.body)
+
+
+ngx.say("code == 200 : "..tostring(assert(code==200)))
+local str = 'rebuild cache success'
+ngx.say('data == '.. str ..' : ' .. tostring(assert(data == str)))
+ngx.say('重建缓存，测试完毕')
+
+end
+
+
+do   --重建缓存
+
+ngx.req.set_header("Content-Type", "application/x-www-form-urlencoded")
+local res = ngx.location.capture("/status",{method=ngx.HTTP_GET})
+
+local code = res.status
+local data = trim(res.body)
+
+
+ngx.say("code == 200 : "..tostring(assert(code==200)))
+assert(data ~= "")
+ngx.say('后端服务器状态，测试完毕')
+
+end
 
 ngx.say('所有测试完毕')
 ngx.exit(200)

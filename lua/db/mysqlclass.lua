@@ -5,28 +5,35 @@ local ERR_MYSQL_LIB = "could not open mysql library"
 local ERR_MYSQL_DB = "could not open mysql database"
 local ERR_MYSQL_ERROR = "mysql occur error"
 
-Mysql_CLass = {
-    host = "192.168.28.4",
-    port = 3306,
-    database = "openapi",
-    user = "root",
-    password = "123456",
-    max_packet_size =  1024 * 1024
-}
+local cache = ngx.shared.cache
 
+
+
+
+Mysql_CLass = class('Mysql_CLass')
+
+function Mysql_CLass:initialize()
+    self.host = "192.168.28.4"
+    self.port = 3306
+    self.database = "openapi"
+    self.user = "root"
+    self.password = "123456"
+    self.max_packet_size =  1024 * 1024
+
+end
 
 
 function Mysql_CLass:connect()
 		
         local db, err = mysql:new()
         if not db then
-	    ngx.log(ngx.ERR, "mysql library error " .. err) --出错记录错误日志
-            return ngx.HTTP_INTERNAL_SERVER_ERROR, nil, ERR_MYSQL_LIB
+	    ngx.log(ngx.ERR, "mysql library error " .. err) --出错记录错误日志，无法加载mysql库
+            return ngx.HTTP_INTERNAL_SERVER_ERROR, nil, ERR_MYSQL_LIB --返回错误code
         end
 
-        db:set_timeout(1000) -- 1 sec
+        db:set_timeout(3000) -- 设定超时间3 sec
 
-	local ok, err, errno, sqlstate = db:connect{
+	local ok, err, errno, sqlstate = db:connect{ --建立数据库连接
                    host = self.host,
                    port = self.port,
                    database = self.database,
@@ -35,57 +42,108 @@ function Mysql_CLass:connect()
                    max_packet_size = self.max_packet_size 
 		}
 
-	if not ok then
-	      ngx.log(ngx.ERR, "mysql not connect: " .. err .. ": " .. errno .. ": ".. sqlstate .. ".") --出错记录错误日志
-	      return ngx.HTTP_INTERNAL_SERVER_ERROR, nil, ERR_MYSQL_DB
+	if not ok then --如果连接失败
+	      ngx.log(ngx.ERR, "mysql not connect: " .. err .. ": " .. errno) --出错记录错误日志
+	      return ngx.HTTP_INTERNAL_SERVER_ERROR, nil, ERR_MYSQL_DB --返回错误code
         end
 
-	return ngx.HTTP_OK, db, nil
+	return ngx.HTTP_OK, db, nil --连接成功返回ok状态码
 
 end
 
 
-function Mysql_CLass:query_api_service(db, uri)
 
-	 local api_service_table = {}
-	 local uri = string.lower(uri or "/")
+function Mysql_CLass:query_all_api_service(db)
+
+	 local api_service_table = {} --定义局部变量存放所有的apiservice对象
 	 
-
-	 local l = string.len(uri)
-	 local pos = string.find(uri, '/', -1)
-	 if(l == pos) then
-	    uri = uri:sub(1,l-1)
-         end
-
-
-	 local res, err, errno, sqlstate =
-              db:query("select id,servicename,servicepath,httpmethod,verifytype,routerpath,serviceroleid from ApiServices where enable = 1 and servicepath = '".. uri .."'" )
-         if not res then
-              ngx.log(ngx.ERR, "bad result: " .. err .. ": " .. errno .. ": ".. sqlstate .. ".") --出错记录错误日志
-              return ngx.HTTP_INTERNAL_SERVER_ERROR, nil, ERR_MYSQL_ERROR
+	 local res, err, errno, sqlstate =  --查询 ApiServices 表
+              db:query("select id,servicename,servicepath,httpmethod,verifytype,routerpath,serviceroleid from ApiServices where enable = 1 " )
+        
+	 if not res then
+	      --如果ApiServices表查询出错
+              ngx.log(ngx.ERR, "get api services error: " .. err .. ": " .. errno .. ": ".. sqlstate .. ".") --出错记录错误日志
+              return ngx.HTTP_INTERNAL_SERVER_ERROR, ERR_MYSQL_ERROR
          end
 	 
 
-	 if(#res == 0) then
-	      return ngx.HTTP_NOT_FOUND, nil, "-10011"	
+	 api_service_table = res 
+         
+	 --遍历 api_service_table 对象，将有 serviceroleid 的项做第二次查询，查找apiuser列表
+	 for i,v in ipairs(api_service_table) do
+	   
+	      if(v.serviceroleid == ngx.null) then
+	           v.serviceroleid = nil
+	      else
+		   local role_id = v.serviceroleid
+
+		   local res2, err, errno, sqlstate =  --联表查询
+                          db:query("SELECT name,apikey,ApiSecret from ApiUserRoleTag as a JOIN ApiUser as b ON a.ApiUserId = b.id where a.ServiceRoleId = " .. role_id )
+		   
+		   if not res2 then
+		       --如果Api user表查询出错
+                       ngx.log(ngx.ERR, "get role list error: " .. err .. ": " .. errno .. ": ".. sqlstate .. ".") --出错记录错误日志
+                       return ngx.HTTP_INTERNAL_SERVER_ERROR, ERR_MYSQL_ERROR
+	           end
+	           
+		   v.apiuser = res2 --将查询出的list存入 api_service_table 值的 apiuser 
+
+	      end
+
+
+	      --将url作为key名，json字符串v存入share的dict.cache
+              local ok,err = pcall(function() 
+		    cache:set(v["servicepath"], cjson.encode(v))
+	      end)
+
+	      --如果table转json字符串出错
+              if not ok then
+		    ngx.log(ngx.ERR, "json encode error: "..err)
+		    return ngx.HTTP_INTERNAL_SERVER_ERROR, err
+              end
 	 end
-
-	 api_service_table = res[1]
-
-
-	 if(api_service_table.serviceroleid == ngx.null) then
-	      return ngx.HTTP_OK, api_service_table, nil
-	 end
-
-	 local res2, err, errno, sqlstate =
-              db:query("SELECT name,apikey,ApiSecret from ApiUserRoleTag as a JOIN ApiUser as b ON a.ApiUserId = b.id where a.ServiceRoleId = " .. api_service_table.serviceroleid )
-         if not res2 then
-              ngx.log(ngx.ERR, "bad result: " .. err .. ": " .. errno .. ": ".. sqlstate .. ".") --出错记录错误日志
-              return ngx.HTTP_INTERNAL_SERVER_ERROR, nil, ERR_MYSQL_ERROR
-         end
-	
-	 api_service_table.apiuser = res2
-
-	 return ngx.HTTP_OK, api_service_table, nil
+         
+	 cache:set("_is_cache", "true")
+	 return ngx.HTTP_OK, nil
 
 end
+
+
+
+
+
+function Mysql_CLass:rebuild() --重建缓存方法
+   
+   cache:flush_all() --清空缓存
+
+   local code, db, err = self:connect() --建立数据库连接
+   
+   if(code ~= ngx.HTTP_OK) then --如果数据库连接建立失败
+       db_connect_code = code
+       return code, err
+   end
+
+   local code, err = self:query_all_api_service(db)
+
+   if(code ~= ngx.HTTP_OK) then
+       db_connect_code = code
+       return code, err
+   end
+
+   --db:close()
+
+   return code, nil
+end
+
+function Mysql_CLass:init() --初始化数据
+
+    if(cache:get("_is_cache") == "false" or not(cache:get("_is_cache"))) then  --如果没有缓存,则去重建
+       ngx.log(ngx.NOTICE, "data from db")
+       return self:rebuild() --去重建缓存
+    end
+
+    ngx.log(ngx.NOTICE, "data from cache")   
+    return ngx.HTTP_OK --从缓存读取
+end
+
+

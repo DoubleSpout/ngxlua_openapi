@@ -16,7 +16,6 @@ ENCODE_TABLE.str = {
 }
 
 
-
 local RES_MSG = {}
 RES_MSG[ngx.HTTP_OK] = ngx.HTTP_OK .. " ok"
 RES_MSG[ngx.HTTP_CREATED] = ngx.HTTP_CREATED .. " created"
@@ -37,10 +36,6 @@ RES_MSG[ngx.HTTP_SERVICE_UNAVAILABLE] = ngx.HTTP_SERVICE_UNAVAILABLE .. " servic
 RES_MSG[ngx.HTTP_GATEWAY_TIMEOUT] = ngx.HTTP_GATEWAY_TIMEOUT .. " gateway timeout"
 
 
-
-
-
-
 ERROR_MSG = {}
 ERROR_MSG["-10000"] = "auth faild"
 ERROR_MSG["-10001"] = "unsupport protocol"
@@ -57,9 +52,11 @@ ERROR_MSG["-10011"] = "service not found"
 ERROR_MSG["-10012"] = "service not ready"
 ERROR_MSG["-10013"] = "param error"
 
+
 ERROR_MSG["-10015"] = "forbidden"
 ERROR_MSG["-10016"] = "unauthorized"
-
+ERROR_MSG["-10017"] = "db error"
+ERROR_MSG["-10018"] = "unknow error"
 
 
 --利用midclass创建Res_Class类
@@ -96,25 +93,23 @@ function Res_Class:send(ops)
     self._error_code = ops.error_code or self._error_code
     local status = ops.status or ngx.HTTP_OK
 
-    if(status == ngx.HTTP_OK) then
+    if(status == ngx.HTTP_OK) then  --如果发送的status是200，则返回正确格式
 	res_table.result = true
 	res_table.error = "null"
         res_table.error_code = -1
 	res_table.request = "null"
-    else
+    else                            --如果发送的status不是200，则返回错误的格式
 	res_table.result = false
 	res_table.error_code = tonumber(self._error_code)
-	res_table.error = ERROR_MSG[self._error_code]
+	res_table.error = ERROR_MSG[self._error_code] or  ERROR_MSG["-10018"]
 	res_table.request = ngx.var.uri
     end
+    --设定响应状态码
+    self:set_status_code(status):set_header("Content-type",ENCODE_TABLE[self._res_type].header) --设定响应的content-type
 
-    
-    
-    self:set_status_code(ops.status or ngx.HTTP_OK)
-    self:set_header("Content-type",ENCODE_TABLE[self._res_type].header)
+    ngx.say(ENCODE_TABLE[self._res_type].encode(res_table)) --将数据返回给客户端
 
-    ngx.say(ENCODE_TABLE[self._res_type].encode(res_table))
-    self.pre_res_table = res_table
+    self.pre_res_table = res_table --将返回的obj存入 pre_res_table 属性
     return self
 end
 
@@ -144,7 +139,6 @@ end
 
 --快速响应404 not found
 function Res_Class:send_not_found()
-
    self:send({status=ngx.HTTP_NOT_FOUND,error_code = "-10011"})
    return self
 end
@@ -159,7 +153,6 @@ end
 
 --快速响应501 not_implemented
 function Res_Class:send_not_implemented()
- 
    self:send({status=ngx.HTTP_METHOD_NOT_IMPLEMENTED, error_code = "-10008"})
    return self
 end

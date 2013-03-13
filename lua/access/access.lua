@@ -1,58 +1,55 @@
 --根据mysql数据库查询是否需要sign然后进行rewrite
+require "mysqlclass" --数据库db类
+require "filterclass" --过滤类，继承req类
+require "resclass" --res类
+require "transclass" --想后端发送请求类
+require "redisclass" --想后端发送请求类
 
-require('filterclass')
-require('resclass')
-require('mysqlclass')
-require('transclass')
 
-local res = Res_Class:new()
+local res = Res_Class:new() --实例化res类
+local mysql = Mysql_CLass:new() --实例化mysql类
 
-local code, db, err = Mysql_CLass:connect()
-if(code ~= ngx.HTTP_OK) then
-   res:send({status=code,data=err})
-   return 
+
+local code, err = mysql:init()  -- 初始化获取数据，如果有缓存则读缓存
+
+if(code ~= ngx.HTTP_OK) then --如果数据初始化失败，则直接返回db错误
+   return res:send({status=500, error_code = "-10017"}) 
 end
 
-local code, service_table, error_code = Mysql_CLass:query_api_service(db, ngx.var.uri)
+--实例化filter类
+local req = Filter:new()
 
-if(code ~= ngx.HTTP_OK) then
-   return res:send({status=code, error_code = error_code})   
-end
-
-local req = Filter:new(service_table)
-
+--开始过滤数据
 local code, error_code = req:check_all()
 
 
+--如果过滤失败，则返回响应的错误信息
 if(code ~= ngx.HTTP_OK) then
    return res:send({status=code, error_code = error_code})   
 end
 
 
+
+--实例化http类，准备向后端发送请求
 local http = Http_Class:new(nil,nil,req.header,req:get_method(),req:get_body())
 
-local ok, code, headers, status, body = http:send_request()
+--发送请求
+local ok, code, backurl = http:send_request()
 
 
 
-if(code ~= ngx.HTTP_OK) then
-    ngx.log(ngx.ERR, "request " .. http.url .." error: " .. code..' body: '.. http.data or "") --出错记录错误日志
+--redis记录访问日志
+local redis = Redis_Class:new(code, req.req_uri, backurl) --实例化redis类
+redis:record() --记录访问日志
+
+
+--如果后端返回状态不为200则记录日志
+if(not ok) then
     res:send_unavailable()
 else
+--正常返回前端
     ngx.say(http.data)
 end
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
