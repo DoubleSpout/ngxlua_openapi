@@ -7424,3 +7424,125 @@ coroutine 0:
 2013/03/13 14:34:10 [error] 15329#0: *372 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
 2013/03/13 14:34:10 [error] 15329#0: *372 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
 2013/03/13 14:34:23 [info] 15329#0: *399 client prematurely closed connection while reading client request line, client: 192.168.17.36, server: test.api6998.com
+2013/03/13 14:37:53 [info] 15329#0: *401 client prematurely closed connection while reading client request line, client: 192.168.17.36, server: test.api6998.com
+2013/03/13 14:49:45 [notice] 15329#0: *412 [lua] redisclass.lua:311: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:49:45 [error] 15329#0: *412 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:49:45 [error] 15329#0: *412 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:50:09 [notice] 15329#0: *412 [lua] redisclass.lua:314: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:50:09 [error] 15329#0: *412 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:50:09 [error] 15329#0: *412 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:50:09 [notice] 15329#0: *412 [lua] redisclass.lua:75: record(): ################################0, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:55 [notice] 15329#0: *417 [lua] redisclass.lua:323: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:55 [error] 15329#0: *417 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:55 [error] 15329#0: *417 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:55 [notice] 15329#0: *417 [lua] redisclass.lua:80: record(): ################################0, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:58 [notice] 15329#0: *417 [lua] redisclass.lua:323: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:58 [error] 15329#0: *417 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:58 [error] 15329#0: *417 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:58 [notice] 15329#0: *417 [lua] redisclass.lua:80: record(): ################################1, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:59 [notice] 15329#0: *417 [lua] redisclass.lua:323: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:59 [error] 15329#0: *417 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:59 [error] 15329#0: *417 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:51:59 [notice] 15329#0: *417 [lua] redisclass.lua:80: record(): ################################2, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [notice] 15329#0: *417 [lua] redisclass.lua:323: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [error] 15329#0: *417 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [error] 15329#0: *417 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [notice] 15329#0: *417 [lua] redisclass.lua:80: record(): ################################3, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [notice] 15329#0: *417 [lua] redisclass.lua:323: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [error] 15329#0: *417 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [error] 15329#0: *417 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [notice] 15329#0: *417 [lua] redisclass.lua:80: record(): ################################4, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:00 [notice] 15329#0: *417 [lua] redisclass.lua:323: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [error] 15329#0: *417 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [error] 15329#0: *417 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [notice] 15329#0: *417 [lua] redisclass.lua:80: record(): ################################5, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [notice] 15329#0: *417 [lua] redisclass.lua:323: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [error] 15329#0: *417 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [error] 15329#0: *417 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [notice] 15329#0: *417 [lua] redisclass.lua:80: record(): ################################6, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [notice] 15329#0: *417 [lua] redisclass.lua:323: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [error] 15329#0: *417 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [error] 15329#0: *417 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 14:52:01 [notice] 15329#0: *417 [lua] redisclass.lua:80: record(): ################################7, client: 192.168.17.36, server: test.api6998.com, request: "POST /api/messages/sendmail HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:12 [error] 15329#0: *427 lua entry thread aborted: runtime error: lua/db/mysqlclass.lua:57: attempt to index global 'red' (a nil value)
+stack traceback:
+coroutine 0:
+	lua/db/mysqlclass.lua: in function 'connect'
+	lua/db/mysqlclass.lua:147: in function 'rebuild'
+	/usr/local/ngx_lua/api/lua/access/rebuild.lua:6: in function </usr/local/ngx_lua/api/lua/access/rebuild.lua:1>, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:34 [notice] 15329#0: *428 [lua] mysqlclass.lua:61: connect(): mysql failed to use connection pool, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:34 [notice] 15329#0: *428 [lua] mysqlclass.lua:65: connect(): #####################0, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:38 [notice] 15329#0: *428 [lua] mysqlclass.lua:65: connect(): #####################1, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:39 [notice] 15329#0: *428 [lua] mysqlclass.lua:65: connect(): #####################2, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:40 [notice] 15329#0: *428 [lua] mysqlclass.lua:65: connect(): #####################3, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:40 [notice] 15329#0: *428 [lua] mysqlclass.lua:65: connect(): #####################4, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:40 [notice] 15329#0: *428 [lua] mysqlclass.lua:65: connect(): #####################5, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:08:46 [info] 15329#0: *431 client prematurely closed connection while reading client request line, client: 192.168.17.36, server: test.api6998.com
+2013/03/13 15:10:47 [notice] 15329#0: *433 [lua] mysqlclass.lua:61: connect(): mysql failed to use connection pool, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:10:48 [info] 15329#0: *433 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:48 [info] 15329#0: *435 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:48 [info] 15329#0: *436 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *437 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *432 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *438 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *439 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *441 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *440 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *443 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *442 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [notice] 15329#0: *444 [lua] mysqlclass.lua:61: connect(): mysql failed to use connection pool, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:10:49 [info] 15329#0: *446 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *447 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *448 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *449 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *450 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:49 [info] 15329#0: *444 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:50 [info] 15329#0: *451 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:50 [info] 15329#0: *452 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:50 [info] 15329#0: *453 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:10:53 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /test HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms123/", host: "test.api6998.com"
+2013/03/13 15:11:06 [error] 15329#0: *455 [lua] test.lua:23: {"result":false,"request":"\/api\/Messages\/SendSms123\/","error_code":-10011,"error":"service not found"}, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [error] 15329#0: *455 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [error] 15329#0: *455 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] redisclass.lua:48: connect(): redis failed to use connection pool, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [error] 15329#0: *455 connect() failed (111: Connection refused), client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [error] 15329#0: *455 [lua] transclass.lua:69: send_request(): http request error, url is http://192.168.28.4:3000, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [error] 15329#0: *455 [lua] test.lua:180: {"status":400,"body":"{\"result\":false,\"request\":\"\\\/api\\\/Messages\\\/SendSms\\\/\",\"error_code\":-10013,\"error\":\"param error\"}\n","header":{"Content-Type":"application\/json"}}, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:11:06 [notice] 15329#0: *455 [lua] mysqlclass.lua:176: init(): data from cache, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", subrequest: "/api/Messages/SendSms/", host: "test.api6998.com"
+2013/03/13 15:11:06 [error] 15329#0: *455 [lua] test.lua:200: {"status":400,"body":"{\"result\":false,\"request\":\"\\\/api\\\/Messages\\\/SendSms\\\/\",\"error_code\":-10003,\"error\":\"sign not given\"}\n","header":{"Content-Type":"application\/json"}}, client: 192.168.17.36, server: test.api6998.com, request: "GET /lua_test HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:12:58 [notice] 15329#0: *459 [lua] mysqlclass.lua:61: connect(): mysql failed to use connection pool, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:12:59 [info] 15329#0: *459 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:00 [info] 15329#0: *461 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:00 [notice] 15329#0: *462 [lua] mysqlclass.lua:61: connect(): mysql failed to use connection pool, client: 192.168.17.36, server: test.api6998.com, request: "GET /rebuild HTTP/1.1", host: "test.api6998.com"
+2013/03/13 15:13:00 [info] 15329#0: *462 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:00 [info] 15329#0: *463 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:05 [info] 15329#0: *465 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:05 [info] 15329#0: *466 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:05 [info] 15329#0: *467 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:05 [info] 15329#0: *468 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:06 [info] 15329#0: *470 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:06 [info] 15329#0: *469 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:06 [info] 15329#0: *471 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:06 [info] 15329#0: *472 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:06 [info] 15329#0: *474 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *473 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *475 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *476 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *477 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *478 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *480 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *481 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *482 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:07 [info] 15329#0: *483 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:24 [info] 15329#0: *484 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:24 [info] 15329#0: *479 client 192.168.17.36 closed keepalive connection
+2013/03/13 15:13:24 [info] 15329#0: *486 client 192.168.17.36 closed keepalive connection
