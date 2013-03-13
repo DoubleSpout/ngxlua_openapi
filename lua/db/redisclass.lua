@@ -1,6 +1,6 @@
 local redis = require "resty.redis" --加载redis库
 
-local LIST_LEN = 20  --设定长度
+local LIST_LEN = 100  --设定长度
 local LIST_NAME = "BACK_SERVER_STATUS"
 
 Redis_Class = class('Redis_Class')
@@ -63,7 +63,7 @@ function Redis_Class:record() --记录访问日志
 	    return ok, err
         end
 	
-	local length, err = red:rpush(LIST_NAME, self:parse())
+	local length, err = red:rpush(LIST_NAME .. self.uri, self:parse())
 	
 	if(not length) then --如果插入失败
 	    ngx.log(ngx.ERR, "failed to lpush list: " .. err) 
@@ -72,7 +72,7 @@ function Redis_Class:record() --记录访问日志
 
 	if(length > LIST_LEN) then  --如果list超长
 
-	    local res,err = red:ltrim(LIST_NAME, 9,-9) --出列10个
+	    local res,err = red:ltrim(LIST_NAME .. self.uri, 9,-9) --出列10个
 
 	    if(not length) then --如果出列失败
 		ngx.log(ngx.ERR, "failed to ltrim list: " .. err) 
@@ -95,13 +95,38 @@ function Redis_Class:get_record() --获取访问日志
 	    return ok, err
         end
 	
-	local list,err = red:lrange(LIST_NAME, 0, LIST_LEN)
-	self.jsonstr = "[" .. table.concat(list,",") .. "]"
+	local keys, err = red:keys(LIST_NAME.."*") --获取所有类似key
 	
-	if(not list) then
+	red:init_pipeline() --初始化流水线，将命令一次性提交
+
+	for i,v in ipairs(keys) do  --录入流水线命令
+	
+		red:lrange(v, 0, LIST_LEN)
+
+	end
+
+	local list,err = red:commit_pipeline() --提交redis命令，等待流水线返回
+	
+	if(not list) then --如果发生错误
 	    ngx.log(ngx.ERR, "lrange list ".. LIST_NAME .." error") 
 	    return false, "lrange list error"
 	end
+	
+	self.cahce={}
+	
+	for i,v in ipairs(list) do  --循环输出结果放入数组，等待最后concat
+
+            for j,u in ipairs(v) do
+		
+		table.insert(self.cahce, u)
+
+	    end
+
+	end
+
+	--ngx.log(ngx.ERR, "#########################", table.concat(self.cahce,",")) 
+	
+	self.jsonstr = "[" .. table.concat(self.cahce,",") .. "]"
 	
 	return true, nil
 end
