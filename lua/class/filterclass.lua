@@ -1,4 +1,7 @@
-require "reqclass" --req类
+module("filterclass", package.seeall)
+
+
+local Req_Class = require "reqclass"["Req_Class"] --req类
 
 local API_SECRET = "ApiSecret"
 local API_KEY = "apikey"

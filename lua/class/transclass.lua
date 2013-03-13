@@ -1,5 +1,6 @@
 --转发http请求的类
 
+module("transclass", package.seeall)
 
 local http = require('resty.http')
 

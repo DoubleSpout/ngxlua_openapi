@@ -1,13 +1,13 @@
 --根据mysql数据库查询是否需要sign然后进行rewrite
-require "mysqlclass" --数据库db类
-require "filterclass" --过滤类，继承req类
-require "resclass" --res类
-require "transclass" --想后端发送请求类
-require "redisclass" --想后端发送请求类
+local Mysql_Class = require "mysqlclass"["Mysql_CLass"] --数据库db类
+local Filter = require "filterclass"["Filter"] --过滤类，继承req类
+local Res_Class = require "resclass"["Res_Class"] --res类
+local Http_Class = require "transclass"["Http_Class"] --想后端发送请求类
+local Redis_Class =  require "redisclass"["Redis_Class"] --想后端发送请求类
 
 
 local res = Res_Class:new() --实例化res类
-local mysql = Mysql_CLass:new() --实例化mysql类
+local mysql = Mysql_Class:new() --实例化mysql类
 
 
 local code, err = mysql:init()  -- 初始化获取数据，如果有缓存则读缓存

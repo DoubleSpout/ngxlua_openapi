@@ -1,6 +1,6 @@
 
-require "resclass" --res类
-require "redisclass" --想后端发送请求类
+local Res_Class = require "resclass"["Res_Class"] --res类
+local Redis_Class =  require "redisclass"["Redis_Class"] --想后端发送请求类
 
 local res = Res_Class:new() --实例化res类
 

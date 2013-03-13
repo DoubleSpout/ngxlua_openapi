@@ -2,6 +2,7 @@
 
 
 --常量定义
+module("resclass", package.seeall)
 
 local DEFAULT_RES_TYPE = 'json'
 local ENCODE_TABLE = {}

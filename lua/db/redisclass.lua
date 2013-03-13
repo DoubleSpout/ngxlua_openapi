@@ -1,3 +1,7 @@
+module("redisclass", package.seeall)
+
+
+
 local redis = require "resty.redis" --加载redis库
 
 local LIST_LEN = 100  --设定长度

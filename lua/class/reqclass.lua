@@ -1,6 +1,14 @@
+
+
+
+
 --对用户请求过来的参数，uri等各种处理的类
 
 --利用midclass创建Req_Class类
+
+module("reqclass", package.seeall)
+
+
 Req_Class = class('Req_Class')
 
 --构造函数

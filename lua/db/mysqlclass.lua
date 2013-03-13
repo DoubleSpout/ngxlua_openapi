@@ -1,3 +1,7 @@
+module("mysqlclass", package.seeall)
+
+
+
 local mysql = require "resty.mysql"
 
 
