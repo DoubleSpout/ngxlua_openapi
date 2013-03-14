@@ -34,12 +34,12 @@ end
 local http = Http_Class:new(nil,nil,req.header,req:get_method(),req:get_body())
 
 --发送请求
-local ok, code, backurl = http:send_request()
+local ok, code, backurl, timer = http:send_request()
 
 
 
 --redis记录访问日志
-local redis = Redis_Class:new(code, req.req_uri, backurl) --实例化redis类
+local redis = Redis_Class:new(code, req.req_uri, backurl, timer, http.data) --实例化redis类
 redis:record() --记录访问日志
 
 

@@ -36,11 +36,28 @@ if(code ~= ngx.HTTP_OK) then
 end
 
 
+
+
+
+--实例化http类，准备向后端发送请求
+local http = Http_Class:new(nil,nil,req.header,req:get_method(),req:get_body())
+
+--发送请求
+local ok, code, backurl = http:send_request()
+
+
+
 --redis记录访问日志
-local redis = Redis_Class:new(nil, req.req_uri, nil) --实例化redis类
+local redis = Redis_Class:new(code, req.req_uri, backurl) --实例化redis类
 redis:record() --记录访问日志
 
 
-ngx.say("test ok")
+--如果后端返回状态不为200则记录日志
+if(not ok) then
+    res:send_unavailable()
+else
+--正常返回前端
+    ngx.say(http.data)
+end
 
 

@@ -9,11 +9,23 @@ if(ngx.req.get_method() ~= "GET") then --如果不是get请求，则返回错误
 end
 
 
-local redis = Redis_Class:new() --实例化redis类
+
+local req_param_uri = ngx.req.get_uri_args()["uri"]
+
+
+--坑爹，这样访问会变成true：http://test.api6998.com/status?uri
+if(not(req_param_uri) or req_param_uri == true) then 
+     req_param_uri = nil
+end
+
+
+local redis = Redis_Class:new(nil,req_param_uri) --实例化redis类
 local list, err = redis:get_record() --记录访问日志
 
 if(not list) then
+
      res:send_server_error()
+
 end
 
 ngx.header["Content-type"] = "application/json"

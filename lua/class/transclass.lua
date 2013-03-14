@@ -25,6 +25,7 @@ function Http_Class:initialize(host, url, header, method, body)
 
     self.method = method or DEF_METHOD
     self.header = {}
+    
     local body = body
 
     if(self.method == "POST" or self.method == "PUT") then --如果是post或者put提交
@@ -56,6 +57,8 @@ function Http_Class:send_request()
 	
 	local data_array = {}
 
+	self.start_ts = os.time() --记录发请求前的时间戳
+
 	local ok, code, headers, status, body = self.http_client:proxy_pass {
 		url = self.url,
 		headers = self.header,
@@ -68,7 +71,7 @@ function Http_Class:send_request()
 
 	if(not ok) then -- 如果请求发送失败
             ngx.log(ngx.ERR, "http request error, url is " .. self.url) --出错记录错误日志
-	    return false, ngx.HTTP_INTERNAL_SERVER_ERROR, self.url --如果出错，返回OK 为false和请求url地址
+	    return false, 502, self.url --如果出错，返回OK 为false和请求url地址
 	end
 
 	if(ngx.header["Transfer-Encoding"]) then  --删除多余的header
@@ -78,12 +81,14 @@ function Http_Class:send_request()
 	if(ngx.header["Connection"]) then --删除多余的header
 		ngx.header["Connection"] = nil
 	end
-	
-	ngx.status = status
 
-	self.data = table.concat(data_array, "") -- 将数组中的数据拼起来      
+	ngx.status = tonumber(code) or 502
+
+	self.end_ts = os.time() --记录发请求前的时间戳
+
+	self.data = table.concat(data_array, "") -- 将数组中的数据拼起来   
 	
-	return true, status, self.url  --返回true和状态码
+	return true, ngx.status, self.url,(self.end_ts - self.start_ts)   --返回true和状态码,backserver的url,请求所花费时间
 end
 
 
