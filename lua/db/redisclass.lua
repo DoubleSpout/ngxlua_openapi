@@ -104,7 +104,7 @@ function Redis_Class:record() --记录访问日志
 	     return false, "json parse error"
 	end
 
-	local length, err = red:rpush(LIST_NAME .. self.uri, self.json_string)
+	local length, err = red:lpush(LIST_NAME .. self.uri, self.json_string)
 	
 	if(not length) then --如果插入失败
 	    self:close_conn()
@@ -114,7 +114,7 @@ function Redis_Class:record() --记录访问日志
 
 	if(length > LIST_LEN) then  --如果list超长
 
-	    local res,err = red:ltrim(LIST_NAME .. self.uri, 9,-9) --出列10个
+	    local res,err = red:ltrim(LIST_NAME .. self.uri, 9, LIST_LEN) --截取10-100
 
 	    if(not length) then --如果出列失败
 		self:close_conn()

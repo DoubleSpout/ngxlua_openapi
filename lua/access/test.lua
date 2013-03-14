@@ -9,8 +9,8 @@ local Http_Class = require "transclass"["Http_Class"] --想后端发送请求类
 local Redis_Class = require "redisclass"["Redis_Class"] --想后端发送请求类
 
 
-
-ngx.req.set_uri("/api/messages/sendmail", false) --重写请求uri路径，false表示不跳转
+local requri = "/api/messages/sendmail"
+ngx.req.set_uri(requri, false) --重写请求uri路径，false表示不跳转
 
 
 local res = Res_Class:new() --实例化res类
@@ -37,27 +37,13 @@ end
 
 
 
-
-
---实例化http类，准备向后端发送请求
-local http = Http_Class:new(nil,nil,req.header,req:get_method(),req:get_body())
-
---发送请求
-local ok, code, backurl = http:send_request()
-
-
-
 --redis记录访问日志
-local redis = Redis_Class:new(code, req.req_uri, backurl) --实例化redis类
+local redis = Redis_Class:new(nil, requri, nil, nil, nil) --实例化redis类
 redis:record() --记录访问日志
 
 
---如果后端返回状态不为200则记录日志
-if(not ok) then
-    res:send_unavailable()
-else
---正常返回前端
-    ngx.say(http.data)
-end
+
+
+ngx.say("test ok")
 
 

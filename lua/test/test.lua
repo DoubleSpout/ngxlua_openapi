@@ -134,25 +134,21 @@ ngx.say('发送错误的sign签名，测试完毕')
 end
 
 
-do   --转发不存在的ip地址
+do   --转发ip地址
 ngx.req.set_header("Content-Type", "application/x-www-form-urlencoded")
 local res = ngx.location.capture(DEFAULT_URL,{method=ngx.HTTP_POST, body=DEFAULT_FORM_STR})
 
 local code = res.status
 local data = trim(res.body)
 
-ngx.say("code == 503 : "..tostring(assert(code==503)))
-local str = '{"result":false,"request":"\\/api\\/Messages\\/SendSms\\/","error_code":-10012,"error":"service not ready"}'
-ngx.say('data == '.. str ..' : ' .. tostring(assert(data == str)))
-ngx.say('转发不存在的ip地址，测试完毕')
+ngx.say("code == 503 or 200 : "..tostring(assert(code==503 or code==200)))
+ngx.say('转发ip地址，测试完毕')
 
 end
 
 
 
 do   --使用json发送数据
-
-
 ngx.req.set_header("Content-Type", "application/json")
 local res = ngx.location.capture(DEFAULT_URL,{method=ngx.HTTP_POST, body=DEFAULT_JSON_STR})
 
@@ -161,9 +157,7 @@ local data = trim(res.body)
 
 --ngx.log(ngx.ERR, cjson.encode(res))
 
-ngx.say("code == 503 : "..tostring(assert(code==503)))
-local str = '{"result":false,"request":"\\/api\\/Messages\\/SendSms\\/","error_code":-10012,"error":"service not ready"}'
-ngx.say('data == '.. str ..' : ' .. tostring(assert(data == str)))
+ngx.say("code == 503 or 200 : "..tostring(assert(code==503 or code==200)))
 ngx.say('使用json发送数据，测试完毕')
 
 end
@@ -225,7 +219,7 @@ ngx.say('重建缓存，测试完毕')
 end
 
 
-do   --重建缓存
+do   --后端服务器
 
 ngx.req.set_header("Content-Type", "application/x-www-form-urlencoded")
 local res = ngx.location.capture("/status",{method=ngx.HTTP_GET})
