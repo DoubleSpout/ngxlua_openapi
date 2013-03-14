@@ -11,10 +11,10 @@ Redis_Class = class('Redis_Class')
 
 
 function Redis_Class:initialize(code, uri, backurl, timer, body)
-    self.host = "192.168.28.4"
+    self.host = "127.0.0.1"
     self.port = 6379
     self.max_idle_timeout = 1000*60
-    self.pool_size = 50
+    self.pool_size = 500
 
     self.red = redis:new() --实例化redis类
     

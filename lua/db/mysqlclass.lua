@@ -26,7 +26,7 @@ function Mysql_CLass:initialize()
     self.max_packet_size =  1024 * 1024
 
     self.max_idle_timeout = 1000*60
-    self.pool_size = 10
+    self.pool_size = 2
 
 end
 

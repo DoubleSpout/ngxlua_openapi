@@ -47,6 +47,7 @@ function Http_Class:initialize(host, url, header, method, body)
     self.header["X-Real-IP"] = ngx.var.remote_addr
     self.header["X-Forwarded-For"] =x_forwarded_for
     self.header["Host"] = host or DEF_HOST
+    self.header["Connection"] ="keep-alive"
 
     self.body = body
 
